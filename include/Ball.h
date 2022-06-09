@@ -11,6 +11,10 @@ enum class DIRECTIONS {
 	LEFT
 };
 
+const int DISTANCE = 50;
+const sf::Vector2u BEGINNING_POS(600,400);
+const int SCALER = 600;
+
 class Ball : public MovingObject
 {
 public:

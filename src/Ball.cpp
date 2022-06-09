@@ -8,7 +8,7 @@ Ball::Ball(b2World& world)
 	m_ballImg.setTexture(m_ballTex);
 	m_ballImg.setOrigin(m_ballTex.getSize().x / 2, 0);
 
-	BodyDef.position = b2Vec2(600, 400);
+	BodyDef.position = b2Vec2(BEGINNING_POS.x, BEGINNING_POS.y);
 	BodyDef.type = b2_dynamicBody;
 	m_Body = world.CreateBody(&BodyDef);
 
@@ -49,8 +49,7 @@ void Ball::update(b2Vec2 pos, const float angle)
 	pos.x = (pos.x <= float(m_ballTex.getSize().x / 2)) ? float(m_ballTex.getSize().x / 2) : pos.x;
 	pos.y = (pos.y <= float(m_ballTex.getSize().y / 2)) ? float(m_ballTex.getSize().y / 2) : pos.y;
 	pos.y = (680 - pos.y <= float(m_ballTex.getSize().y / 2)) ? 680 - float(m_ballTex.getSize().y / 2) : pos.y;
-	m_ballImg.setPosition(pos.x, 600 - pos.y);
-	//m_ballImg.setRotation(angle * 180 / b2_pi);
+	m_ballImg.setPosition(pos.x, SCALER - pos.y);
 }
 
 bool Ball::collidesWith(GameObject& object)
@@ -60,13 +59,13 @@ bool Ball::collidesWith(GameObject& object)
 
 void Ball::restartBall()
 {
-	m_ballImg.setPosition(600, 200);
-	m_Body->SetTransform(b2Vec2(600, 400), m_Body->GetAngle());
+	m_ballImg.setPosition(BEGINNING_POS.x, SCALER - BEGINNING_POS.y);
+	m_Body->SetTransform(b2Vec2(BEGINNING_POS.x, BEGINNING_POS.y), m_Body->GetAngle());
 }
 
 void Ball::changeTransform(sf::Vector2f distance)
 {
-	m_ballImg.setPosition(distance.x - 50, 300);
-	m_Body->SetTransform(b2Vec2(distance.x - 50, 300), m_Body->GetAngle());
+	m_ballImg.setPosition(distance.x - DISTANCE, 300);
+	m_Body->SetTransform(b2Vec2(distance.x - DISTANCE, 300), m_Body->GetAngle());
 	m_Body->SetLinearVelocity(b2Vec2(0,0));
 }
