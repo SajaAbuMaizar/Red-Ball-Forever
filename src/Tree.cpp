@@ -4,7 +4,7 @@ Tree::Tree(std::shared_ptr<b2World>& world,const sf::Texture& treeTex, const sf:
 	: m_pos(position),
 	  m_treeImg(treeTex)
 {
-	m_treeImg.setOrigin(treeTex.getSize().x / 2, treeTex.getSize().y / 2);
+	m_treeImg.setOrigin(float(treeTex.getSize().x / 2), float(treeTex.getSize().y / 2));
 	m_treeImg.setPosition(m_pos.x,m_pos.y - treeTex.getSize().y / 2);
 
 	b2BodyDef BodyDef;

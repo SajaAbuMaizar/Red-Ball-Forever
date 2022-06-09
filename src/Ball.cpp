@@ -6,7 +6,7 @@ Ball::Ball(b2World& world)
 	m_ballSound = sf::Sound(m_balljumpSoundBuf);
 	m_ballTex.loadFromFile("ball.png");
 	m_ballImg.setTexture(m_ballTex);
-	m_ballImg.setOrigin(m_ballTex.getSize().x / 2, 0);
+	m_ballImg.setOrigin(float(m_ballTex.getSize().x / 2), 0.f);
 
 	BodyDef.position = b2Vec2(BEGINNING_POS.x, BEGINNING_POS.y);
 	BodyDef.type = b2_dynamicBody;
@@ -44,7 +44,7 @@ void Ball::move(const DIRECTIONS dir)
 	}
 }
 
-void Ball::update(b2Vec2 pos, const float angle)
+void Ball::update(b2Vec2 pos)
 {
 	pos.x = (pos.x <= float(m_ballTex.getSize().x / 2)) ? float(m_ballTex.getSize().x / 2) : pos.x;
 	pos.y = (pos.y <= float(m_ballTex.getSize().y / 2)) ? float(m_ballTex.getSize().y / 2) : pos.y;

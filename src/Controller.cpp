@@ -38,7 +38,7 @@ bool Controller::run()
         {
             if (BodyIterator->GetType() == b2_dynamicBody)
             {
-                m_ball.update(BodyIterator->GetPosition(), BodyIterator->GetAngle());
+                m_ball.update(BodyIterator->GetPosition());
                 m_ball.draw(m_window);
             }
             else if (BodyIterator->GetType() == b2_kinematicBody)
@@ -93,6 +93,7 @@ bool Controller::run()
             }
         }
     }
+    return true;
 }
 
 void Controller::updateView()

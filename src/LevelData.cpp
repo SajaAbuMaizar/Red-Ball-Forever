@@ -26,20 +26,20 @@ void LevelData::update(const sf::Vector2f pos, const int currlevel, const int cu
 	std::string level = "Level : " + std::to_string(currlevel);//calculating the number of levels
 	m_levelText = sf::Text(level, m_font);
 	m_levelText.setPosition(420 + abs(pos.x - 500), 10);
-	m_levelText.setColor(sf::Color::Black);
+	m_levelText.setFillColor(sf::Color::Black);
 
 	std::string score = "Score : " + std::to_string(currScore);//calculating the number of levels
 	m_scoreText = sf::Text(score, m_font);
 	m_scoreText.setPosition(800 + abs(pos.x - 500), 10);
-	m_scoreText.setColor(sf::Color::Black);
+	m_scoreText.setFillColor(sf::Color::Black);
 }
 
 void LevelData::showResult(const std::pair<sf::Texture,sf::Texture>& result)
 {
 	sf::Sprite resultImg(result.first);
     sf::Sprite playButtonImg(result.second);
-    playButtonImg.setOrigin(result.second.getSize().x/2, result.second.getSize().y/2);
-    playButtonImg.setPosition(result.first.getSize().x/2, result.first.getSize().y/1.3);
+    playButtonImg.setOrigin(float(result.second.getSize().x/2), float(result.second.getSize().y/2));
+    playButtonImg.setPosition(float(result.first.getSize().x/2), float(result.first.getSize().y/1.3));
 	sf::RenderWindow resultWindow(sf::VideoMode(result.first.getSize().x, result.first.getSize().y), "!! Result Window !!");
 
     while (resultWindow.isOpen())

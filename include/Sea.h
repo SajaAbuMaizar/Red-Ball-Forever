@@ -9,6 +9,7 @@ public:
 	void draw(sf::RenderWindow& window) { window.draw(m_seaImg); };
 	sf::Sprite getSprite() const { return m_seaImg; };
 	sf::Vector2f getPosition() const { return m_seaImg.getPosition(); };
+	virtual ~Sea() = default;
 
 private:
 	sf::Sprite m_seaImg;

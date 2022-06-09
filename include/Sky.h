@@ -9,6 +9,7 @@ public:
 	Sky(sf::Texture& skyTex, const int size);
 	void draw(sf::RenderWindow& window);
 	sf::Sprite getSprite() const { return m_skyImg[0]; };
+	virtual ~Sky() = default;
 
 private:
 	
