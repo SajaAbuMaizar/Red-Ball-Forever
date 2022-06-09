@@ -7,7 +7,7 @@ Star::Star(std::shared_ptr<b2World>& world, sf::Texture& starTex, const int posi
 	m_starImg.setOrigin(float(starTex.getSize().x / 2), 0.f);
 
 	b2BodyDef BodyDef;
-	BodyDef.position = b2Vec2(500 * m_pos, (POS_SCALER*2));
+	BodyDef.position = b2Vec2(float(500 * m_pos), float(POS_SCALER*2));
 	
 	BodyDef.type = b2_staticBody;
 	m_Body = world->CreateBody(&BodyDef);

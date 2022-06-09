@@ -31,12 +31,12 @@ void LevelData::update(const sf::Vector2f pos, const int currlevel, const int cu
 	std::string level = "Level : " + std::to_string(currlevel);//calculating the number of levels
 	m_levelText = sf::Text(level, m_font);
 	m_levelText.setPosition(420 + abs(pos.x - POSITION_FITTER), 10);
-	m_levelText.setColor(sf::Color::Black);
+	m_levelText.setFillColor(sf::Color::Black);
 
 	std::string score = "Score : " + std::to_string(currScore);//calculating the score of the level
 	m_scoreText = sf::Text(score, m_font);
 	m_scoreText.setPosition(800 + abs(pos.x - POSITION_FITTER), 10);
-	m_scoreText.setColor(sf::Color::Black);
+	m_scoreText.setFillColor(sf::Color::Black);
 }
 
 void LevelData::showResult(const std::pair<sf::Texture,sf::Texture>& result)

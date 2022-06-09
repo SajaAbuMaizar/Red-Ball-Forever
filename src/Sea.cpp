@@ -5,7 +5,7 @@ Sea::Sea(sf::Texture& texture, std::shared_ptr<b2World>& world, int pos) :
 	m_pos(pos)
 {
 	b2BodyDef BodyDef;
-	BodyDef.position.Set((POS_SCALER/2) + pos * POS_SCALER, POS_SCALER - (65));
+	BodyDef.position.Set(float((POS_SCALER/2) + pos * POS_SCALER), float(POS_SCALER - (65)));
 	BodyDef.type = b2_staticBody;
 	b2Body* Body = world->CreateBody(&BodyDef);
 
@@ -16,7 +16,10 @@ Sea::Sea(sf::Texture& texture, std::shared_ptr<b2World>& world, int pos) :
 	FixtureDef.shape = &Shape;
 	Body->CreateFixture(&FixtureDef);
 
-	m_seaImg.setPosition(m_pos * POS_SCALER, (POS_SCALER*2));
+	m_seaImg.setPosition(float(m_pos * POS_SCALER), float(POS_SCALER*2));
+
+	//m_SeaImg.setOrigin(0, m_SeaTex.getSize().y);
+
 }
 
 bool Sea::checkCollision(GameObject& object)

@@ -9,7 +9,7 @@ Ground::Ground(sf::Texture& texture, std::shared_ptr<b2World>& world
 	                                                            m_prev(prev)
 {
 	b2BodyDef BodyDef;
-	BodyDef.position.Set(100 + pos * POS_SCALER, m_type * POS_SCALER - ((m_type - 1) * FITTER));
+	BodyDef.position.Set(float(100 + pos * POS_SCALER), float(m_type * POS_SCALER - ((m_type - 1) * FITTER)));
 	BodyDef.type = b2_staticBody;
 	b2Body* Body = world->CreateBody(&BodyDef);
 
@@ -20,6 +20,6 @@ Ground::Ground(sf::Texture& texture, std::shared_ptr<b2World>& world
 	FixtureDef.shape = &Shape;
 	Body->CreateFixture(&FixtureDef);
 	
-	m_groundImg.setPosition(m_pos * POS_SCALER, (POS_SCALER *2) - ((m_type - 1) * POS_SCALER)); //for tall and short grounds
+	m_groundImg.setPosition(float(m_pos * POS_SCALER), float((POS_SCALER *2) - ((m_type - 1) * POS_SCALER))); //for tall and short grounds
 
 }
