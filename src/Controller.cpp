@@ -8,11 +8,18 @@ Controller::Controller(const int level) : m_window(sf::VideoMode(WIDTH, HEIGHT),
                            m_success(false),
                            m_availableLives(LIVES)
 {
-    m_lostResult.first.loadFromFile("result lose.jpg");
-    m_lostResult.second.loadFromFile("replay.png");
-    m_winResult.first.loadFromFile("win result.jpg");
-    m_winResult.second.loadFromFile("play.png");
-    m_skyTex.loadFromFile("sky.jpg");
+    try
+    {
+        m_lostResult.first.loadFromFile("result lose.jpg");
+        m_lostResult.second.loadFromFile("replay.png");
+        m_winResult.first.loadFromFile("win result.jpg");
+        m_winResult.second.loadFromFile("play.png");
+        m_skyTex.loadFromFile("sky.jpg");
+    }
+    catch (...)
+    {
+        std::cerr << "Can't load program files\n";
+    }
     m_window.close();
 }
 

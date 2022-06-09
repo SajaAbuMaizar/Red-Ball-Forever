@@ -2,7 +2,14 @@
 
 Monster::Monster(std::shared_ptr<b2World>& world, sf::Vector2f pos): m_pos(pos)
 {
-	m_MonsterTex.loadFromFile("Monster.png");
+	try
+	{
+		m_MonsterTex.loadFromFile("Monster.png");
+	}
+	catch (...)
+	{
+		std::cerr << "Can't load program files\n";
+	}
 	m_MonsterImg.setTexture(m_MonsterTex);
 	m_MonsterImg.setOrigin(float(m_MonsterTex.getSize().x / 2), float(m_MonsterTex.getSize().y / 2));
 
