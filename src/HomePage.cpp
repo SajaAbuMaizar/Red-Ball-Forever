@@ -4,6 +4,7 @@ HomePage::HomePage() : m_homePage(sf::VideoMode(WIDTH, HEIGHT), "Red Ball Foreve
 {
     m_background.loadFromFile("backGroundHome.png");
     m_playButton.loadFromFile("playButton.jpg");
+    m_playButtonClicked.loadFromFile("playButtonClicked.jpg");
     m_controls.loadFromFile("controls.png");
 }
 
@@ -39,7 +40,7 @@ bool HomePage::display()
                 {
                     homeCounter++;
                     backGroundImg.setTexture(m_controls);
-                    playButtonImg.setPosition(sf::Vector2f(WIDTH - m_playButton.getSize().x/2,HEIGHT - m_playButton.getSize().y / 2));
+                    playButtonImg.setPosition(sf::Vector2f(WIDTH - m_playButton.getSize().x / 2, HEIGHT - m_playButton.getSize().y / 2));
                     if (homeCounter == 2)
                     {
                         m_homePage.close();
@@ -47,7 +48,17 @@ bool HomePage::display()
                     }
                     break;
                 }
-
+            }
+            case sf::Event::MouseMoved:
+            {
+                auto location = m_homePage.mapPixelToCoords({ event.mouseMove.x, event.mouseMove.y });
+                if (playButtonImg.getGlobalBounds().contains(location))//if the mouse is on the play button
+                {
+                    playButtonImg.setTexture(m_playButtonClicked);
+                }
+                else
+                    playButtonImg.setTexture(m_playButton);
+                break;
             }
             }
         }
