@@ -2,9 +2,17 @@
 
 Ball::Ball(b2World& world)
 {
-	m_balljumpSoundBuf.loadFromFile("ball jump sound.wav");
+	try
+	{
+		m_balljumpSoundBuf.loadFromFile("ball jump sound.wav");
+		m_ballTex.loadFromFile("ball.png");
+	}
+	catch (...)
+	{
+		std::cerr << "Can't load program files\n";
+	}
+	
 	m_ballSound = sf::Sound(m_balljumpSoundBuf);
-	m_ballTex.loadFromFile("ball.png");
 	m_ballImg.setTexture(m_ballTex);
 	m_ballImg.setOrigin(float(m_ballTex.getSize().x / 2), 0.f);
 

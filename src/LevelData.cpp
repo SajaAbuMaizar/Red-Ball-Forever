@@ -2,13 +2,18 @@
 
 LevelData::LevelData()
 {
-	m_hearts.resize(LIVES);
-	m_hearts[2].loadFromFile("alive hearts.png");
-	m_hearts[1].loadFromFile("one dead heart.png");
-	m_hearts[0].loadFromFile("two dead hearts.png");
-    
+    m_hearts.resize(LIVES);
+    try
+    {
+        m_hearts[2].loadFromFile("alive hearts.png");
+        m_hearts[1].loadFromFile("one dead heart.png");
+        m_hearts[0].loadFromFile("two dead hearts.png");
+    }
+    catch (...)
+    {
+        std::cerr << "Can't load program files\n";
+    }
 	m_heartImg.setTexture(m_hearts[0]);
-
 	m_font.loadFromFile("C:/Windows/Fonts/COOPBL.ttf");
 }
 

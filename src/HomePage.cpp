@@ -2,10 +2,17 @@
 
 HomePage::HomePage() : m_homePage(sf::VideoMode(WIDTH, HEIGHT), "Red Ball Forever Home Page")
 {
-    m_background.loadFromFile("backGroundHome.png");
-    m_playButton.loadFromFile("playButton.jpg");
-    m_playButtonClicked.loadFromFile("playButtonClicked.jpg");
-    m_controls.loadFromFile("controls.png");
+    try
+    {
+        m_background.loadFromFile("backGroundHome.png");
+        m_playButton.loadFromFile("playButton.jpg");
+        m_playButtonClicked.loadFromFile("playButtonClicked.jpg");
+        m_controls.loadFromFile("controls.png");
+    }
+    catch (...)
+    {
+        std::cerr << "Can't load program files\n";
+    }
 }
 
 //returns true if done

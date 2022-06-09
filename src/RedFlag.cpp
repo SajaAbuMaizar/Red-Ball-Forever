@@ -2,7 +2,14 @@
 
 RedFlag::RedFlag(b2World& world, const int size)
 {
-	m_redFlag.loadFromFile("red flag.png");
+	try
+	{
+		m_redFlag.loadFromFile("red flag.png");
+	}
+	catch (...)
+	{
+		std::cerr << "Can't load program files\n";
+	}
 	m_redFlagImg.setTexture(m_redFlag);
 	m_redFlagImg.setPosition((size - 2) * POS_SCALER, (POS_SCALER*2) - m_redFlag.getSize().y);
 

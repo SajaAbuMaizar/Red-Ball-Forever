@@ -2,7 +2,6 @@
 
 Sky::Sky(sf::Texture& skyTex, const int size)
 {
-	
 	m_skyImg.resize(size/6);
 	int i = 0;
 	for (auto& it: m_skyImg)
