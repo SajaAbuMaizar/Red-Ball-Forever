@@ -8,7 +8,7 @@ Tree::Tree(std::shared_ptr<b2World>& world,const sf::Texture& treeTex, const sf:
 	m_treeImg.setPosition(m_pos.x,m_pos.y - treeTex.getSize().y / 2);
 
 	b2BodyDef BodyDef;
-	BodyDef.position = b2Vec2(m_pos.x, 600 - m_pos.y + treeTex.getSize().y / 2);
+	BodyDef.position = b2Vec2(m_pos.x, SCALER - m_pos.y + treeTex.getSize().y / 2);
 
 	BodyDef.type = b2_staticBody;
 	m_Body = world->CreateBody(&BodyDef);

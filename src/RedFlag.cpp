@@ -4,10 +4,10 @@ RedFlag::RedFlag(b2World& world, const int size)
 {
 	m_redFlag.loadFromFile("red flag.png");
 	m_redFlagImg.setTexture(m_redFlag);
-	m_redFlagImg.setPosition((size - 2) * 200, 400 - m_redFlag.getSize().y);
+	m_redFlagImg.setPosition((size - 2) * POS_SCALER, (POS_SCALER*2) - m_redFlag.getSize().y);
 
 	b2BodyDef BodyDef;
-	BodyDef.position = b2Vec2((size - 2) * 200, 220);
+	BodyDef.position = b2Vec2((size - 2) * POS_SCALER, 220);
 	BodyDef.type = b2_staticBody;
 	b2Body* Body = world.CreateBody(&BodyDef);
 

@@ -5,7 +5,7 @@ Obstacle::Obstacle(std::shared_ptr<b2World>& world, sf::Texture& texture, const 
 	     m_ObstacleImg(texture)
 {
 	b2BodyDef BodyDef;
-	BodyDef.position = b2Vec2(50 + m_pos.x , 600 - m_pos.y + 50);
+	BodyDef.position = b2Vec2(50 + m_pos.x , SCALER - m_pos.y + 50);
 	BodyDef.type = b2_staticBody;
 	m_Body = world->CreateBody(&BodyDef);
 

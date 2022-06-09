@@ -4,6 +4,7 @@
 #include <cmath>
 
 const int LIVES = 3;
+const int POSITION_FITTER = 500;
 
 class LevelData
 {
