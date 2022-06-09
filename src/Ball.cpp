@@ -59,8 +59,8 @@ bool Ball::collidesWith(GameObject& object)
 
 void Ball::restartBall()
 {
-	m_ballImg.setPosition(BEGINNING_POS.x, SCALER - BEGINNING_POS.y);
-	m_Body->SetTransform(b2Vec2(BEGINNING_POS.x, BEGINNING_POS.y), m_Body->GetAngle());
+	m_ballImg.setPosition(float(BEGINNING_POS.x), float(SCALER - BEGINNING_POS.y));
+	m_Body->SetTransform(b2Vec2(float(BEGINNING_POS.x), float(BEGINNING_POS.y)), m_Body->GetAngle());
 }
 
 void Ball::changeTransform(sf::Vector2f distance)
