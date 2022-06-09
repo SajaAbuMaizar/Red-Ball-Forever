@@ -12,6 +12,7 @@ Controller::Controller(const int level) : m_window(sf::VideoMode(WIDTH, HEIGHT),
     m_lostResult.second.loadFromFile("replay.png");
     m_winResult.first.loadFromFile("win result.jpg");
     m_winResult.second.loadFromFile("play.png");
+    m_skyTex.loadFromFile("sky.jpg");
     m_window.close();
 }
 
@@ -21,7 +22,7 @@ bool Controller::run()
     m_window.setFramerateLimit(360);
     ///
     Map currentMap(createFileName(), m_world);
-    Sky sky(currentMap.getGroundAmount());
+    Sky sky(m_skyTex ,currentMap.getGroundAmount());
     RedFlag redFlag(*m_world, currentMap.getGroundAmount());
     Monster monster(m_world, redFlag.getSprite().getPosition());
     while (m_window.isOpen())

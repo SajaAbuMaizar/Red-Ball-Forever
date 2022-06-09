@@ -1,10 +1,10 @@
 #include "Star.h"
 
-Star::Star(std::shared_ptr<b2World>& world, const int position) : m_pos(position)
+Star::Star(std::shared_ptr<b2World>& world, sf::Texture& starTex, const int position)
+	   : m_pos(position),
+	     m_starImg(starTex)
 {
-	m_starTex.loadFromFile("Star.png");
-	m_starImg.setTexture(m_starTex);
-	m_starImg.setOrigin(m_starTex.getSize().x / 2, 0);
+	m_starImg.setOrigin(starTex.getSize().x / 2, 0);
 
 	b2BodyDef BodyDef;
 	BodyDef.position = b2Vec2(500 * m_pos, 400);

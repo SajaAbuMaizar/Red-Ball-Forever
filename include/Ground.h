@@ -23,6 +23,5 @@ private:
 	int m_pos;
 	int m_type; //tall or short
 	int m_side; //left or right or middle
-	//std::vector<sf::Sprite> m_groundImg;
 	int m_prev;
 };

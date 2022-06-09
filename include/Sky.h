@@ -6,11 +6,11 @@
 class Sky : public StaticObject
 {
 public:
-	Sky(const int size);
+	Sky(sf::Texture& skyTex, const int size);
 	void draw(sf::RenderWindow& window);
 	sf::Sprite getSprite() const { return m_skyImg[0]; };
 
 private:
-	sf::Texture m_skyTex;
+	
 	std::vector <sf::Sprite> m_skyImg;
 };

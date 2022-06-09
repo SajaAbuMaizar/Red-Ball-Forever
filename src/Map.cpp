@@ -12,6 +12,7 @@ Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 	m_boxTex.loadFromFile("box.jpg");
 	m_treeTex.loadFromFile("tree.png");
 	m_ObstacleTex.loadFromFile("obsticle.png");
+	m_starTex.loadFromFile("Star.png");
 	m_starCollectSoundBuf.loadFromFile("star collect sound.wav");
 	m_starSound = sf::Sound(m_starCollectSoundBuf);
 
@@ -57,7 +58,7 @@ Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 	m_star.resize(pos/3);
 	for (auto& it: m_star)
 	{
-		it = std::make_shared<Star>(world, counter);
+		it = std::make_shared<Star>(world,m_starTex, counter);
 		counter++;
 	}
 	

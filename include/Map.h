@@ -28,6 +28,7 @@ private:
 	sf::Texture m_boxTex;
 	sf::Texture m_treeTex;
 	sf::Texture m_ObstacleTex;
+	sf::Texture m_starTex;
 	std::vector<std::shared_ptr<Ground>> m_ground;
 	std::vector<std::shared_ptr<Sea>> m_sea;
 	std::vector<std::shared_ptr<Obstacle>> m_obstacle;

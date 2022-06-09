@@ -34,6 +34,7 @@ private:
 	int m_score;
 	bool m_success;
 	int m_availableLives;
+	sf::Texture m_skyTex;
 	
 	
 	DIRECTIONS m_dir = DIRECTIONS::RIGHT;
