@@ -63,3 +63,10 @@ void Ball::restartBall()
 	m_ballImg.setPosition(600, 200);
 	m_Body->SetTransform(b2Vec2(600, 400), m_Body->GetAngle());
 }
+
+void Ball::changeTransform(sf::Vector2f distance)
+{
+	m_ballImg.setPosition(distance.x - 50, 300);
+	m_Body->SetTransform(b2Vec2(distance.x - 50, 300), m_Body->GetAngle());
+	m_Body->SetLinearVelocity(b2Vec2(0,0));
+}

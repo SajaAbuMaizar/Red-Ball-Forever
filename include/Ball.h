@@ -22,6 +22,7 @@ public:
 	sf::Vector2f getPosition() const { return m_ballImg.getPosition(); };
 	void draw(sf::RenderWindow& window) { window.draw(m_ballImg); };
 	void restartBall();
+	void changeTransform(sf::Vector2f distance);
 
 private:
 	b2Body* m_Body;

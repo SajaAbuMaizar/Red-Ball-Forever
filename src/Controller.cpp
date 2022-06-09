@@ -54,10 +54,16 @@ bool Controller::run()
             m_levelData.showResult(m_winResult);
             return true;
         }
-        if (currentMap.checkCollisionWithSea(m_ball) || currentMap.checkCollisionWithObstacle(m_ball)||
+        if (currentMap.checkCollisionWithSea(m_ball) ||
              monster.checkCollisionwithBall(m_ball))
         {
             m_ball.restartBall();
+            m_availableLives--;
+        }
+        std::pair<bool, sf::Vector2f> obstacleResult = currentMap.checkCollisionWithObstacle(m_ball);
+        if (obstacleResult.first)
+        {
+            m_ball.changeTransform(obstacleResult.second);
             m_availableLives--;
         }
         if (m_availableLives == 0)

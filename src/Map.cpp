@@ -11,6 +11,7 @@ Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 	m_seaTex.loadFromFile("Sea.png");
 	m_boxTex.loadFromFile("box.jpg");
 	m_treeTex.loadFromFile("tree.png");
+	m_ObstacleTex.loadFromFile("obsticle.png");
 	m_starCollectSoundBuf.loadFromFile("star collect sound.wav");
 	m_starSound = sf::Sound(m_starCollectSoundBuf);
 
@@ -71,7 +72,7 @@ Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 		}
 		if (counter == 7)
 		{
-			m_obstacle.push_back(std::make_shared<Obstacle>(world, tempPos));
+			m_obstacle.push_back(std::make_shared<Obstacle>(world,m_ObstacleTex, tempPos));
 			counter = 0;
 		}
 	}
@@ -100,12 +101,18 @@ bool Map::checkCollisionWithStars(Ball& ball)
 	return false;
 }
 
-bool Map::checkCollisionWithObstacle(Ball& ball)
+std::pair<bool, sf::Vector2f> Map::checkCollisionWithObstacle(Ball& ball)
 {
+	std::pair<bool, sf::Vector2f> result;
+	result.first = false;
 	for (int i = 0; i < m_obstacle.size(); i++)
 		if (ball.collidesWith(*m_obstacle[i]))
-			return true;
-	return false;
+		{
+			result.first = true;
+			result.second = m_obstacle[i]->getSprite().getPosition();
+		}
+			
+	return result;
 }
 
 bool Map::checkCollisionWithSea(Ball& ball)

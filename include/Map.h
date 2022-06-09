@@ -20,13 +20,14 @@ public:
 	int getGroundAmount() const { return m_ground.size(); };
 	bool checkCollisionWithStars(Ball& ball);
 	bool checkCollisionWithSea(Ball& ball);
-	bool checkCollisionWithObstacle(Ball& ball);
+	std::pair<bool, sf::Vector2f> checkCollisionWithObstacle(Ball& ball);
 
 private:
 	std::vector<sf::Texture> m_groundTex;
 	sf::Texture m_seaTex;
 	sf::Texture m_boxTex;
 	sf::Texture m_treeTex;
+	sf::Texture m_ObstacleTex;
 	std::vector<std::shared_ptr<Ground>> m_ground;
 	std::vector<std::shared_ptr<Sea>> m_sea;
 	std::vector<std::shared_ptr<Obstacle>> m_obstacle;

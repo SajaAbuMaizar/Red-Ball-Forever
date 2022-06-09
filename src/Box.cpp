@@ -14,7 +14,7 @@ Box::Box(std::shared_ptr<b2World>& world, sf::Texture& boxTex, const sf::Vector2
 	m_Body->SetLinearVelocity(b2Vec2(1, 0)); //move right 1 unit per second
 
 	b2PolygonShape Shape;
-	Shape.SetAsBox(60.5f, 100.5f);
+	Shape.SetAsBox(80.5f, 105.5f);
 
 	b2FixtureDef FixtureDef;
 	FixtureDef.density = 1.f;
