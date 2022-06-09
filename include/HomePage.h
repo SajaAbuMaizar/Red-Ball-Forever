@@ -15,5 +15,6 @@ private:
 	sf::RenderWindow m_homePage;
 	sf::Texture m_background;
 	sf::Texture m_playButton;
+	sf::Texture m_playButtonClicked;
 	sf::Texture m_controls;
 };

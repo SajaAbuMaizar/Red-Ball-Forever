@@ -1,5 +1,6 @@
 ﻿configure_file ("backGroundHome.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("playButton.jpg" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("playButtonClicked.jpg" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("controls.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("ground.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Sea.png" ${CMAKE_BINARY_DIR} COPYONLY)
