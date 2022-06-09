@@ -31,22 +31,22 @@ Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 		switch (shape)
 		{
 			m_map.push_back(shape);
-		case 0: //left
-			m_ground.push_back(std::make_shared<Ground>(m_groundTex[0], world, pos,1,0, prev));
+		case LEFT_GROUND: //left
+			m_ground.push_back(std::make_shared<Ground>(m_groundTex[LEFT_GROUND], world, pos,1, LEFT_GROUND, prev));
 			break;
-		case 1: //middle
-			m_ground.push_back(std::make_shared<Ground>(m_groundTex[1], world, pos,1,1,prev));
+		case MIDDLE_GROUND: //middle
+			m_ground.push_back(std::make_shared<Ground>(m_groundTex[MIDDLE_GROUND], world, pos,1, MIDDLE_GROUND,prev));
 			break;
-		case 2: //right
-			m_ground.push_back(std::make_shared<Ground>(m_groundTex[2], world, pos,1,2,prev));
+		case RIGHT_GROUND: //right
+			m_ground.push_back(std::make_shared<Ground>(m_groundTex[RIGHT_GROUND], world, pos,1, RIGHT_GROUND,prev));
 			break;
-		case 3: //left tall edge
-			m_ground.push_back(std::make_shared<Ground>(m_groundTex[3], world, pos, 2,3,prev));
+		case LEFT_TALL_GROUND: //left tall edge
+			m_ground.push_back(std::make_shared<Ground>(m_groundTex[LEFT_TALL_GROUND], world, pos, 2, LEFT_TALL_GROUND,prev));
 			break;
-		case 4: //right tall edge
-			m_ground.push_back(std::make_shared<Ground>(m_groundTex[4], world, pos, 2,4,prev));
+		case RIGHT_TALL_GROUND: //right tall edge
+			m_ground.push_back(std::make_shared<Ground>(m_groundTex[RIGHT_TALL_GROUND], world, pos, 2, RIGHT_TALL_GROUND,prev));
 			break;
-		case 5: //sea
+		case SEA_GROUND: //sea
 			m_sea.push_back(std::make_shared<Sea>(m_seaTex, world, pos));
 			break;
 		}
@@ -66,28 +66,25 @@ Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 	sf::Vector2f tempPos;
 	for (const auto& it : m_ground)
 	{
-		if (it->getSide() == 1) // 1 = middle
+		if (it->getSide() == MIDDLE_GROUND)
 		{
 			counter++;
 			tempPos = it->getPosition();
 		}
-		if (counter == 7)
+		if (counter == 7) //every 7 middle ground, insert an obstacle
 		{
 			m_obstacle.push_back(std::make_shared<Obstacle>(world,m_ObstacleTex, tempPos));
 			counter = 0;
 		}
 	}
 
+	//create box when there is a tall ground
 	for (int i = 0 ; i < m_ground.size(); i++)
-	{
-		if (m_ground[i]->getSide() == 3 && m_ground[i]->getPrev() != 5) 
-		{
+		if (m_ground[i]->getSide() == LEFT_TALL_GROUND && m_ground[i]->getPrev() != SEA_GROUND)
 			m_box.push_back(std::make_shared<Box>(world, m_boxTex, m_ground[i-1]->getPosition()));
-		}
-	}
 
-	m_tree.push_back(std::make_shared<Tree>(world, m_treeTex, sf::Vector2f(400,400)));//first tree
-	m_tree.push_back(std::make_shared<Tree>(world, m_treeTex, m_ground[m_ground.size() - 2]->getPosition()));//last tree
+	m_tree.push_back(std::make_shared<Tree>(world, m_treeTex, sf::Vector2f(400,400)));//first tree(at the beginning of game)
+	m_tree.push_back(std::make_shared<Tree>(world, m_treeTex, m_ground[m_ground.size() - 2]->getPosition()));//last tree(at the ending of game)
 }
 
 bool Map::checkCollisionWithStars(Ball& ball)
