@@ -17,9 +17,6 @@ Sea::Sea(sf::Texture& texture, std::shared_ptr<b2World>& world, int pos) :
 	Body->CreateFixture(&FixtureDef);
 
 	m_seaImg.setPosition(m_pos * POS_SCALER, (POS_SCALER*2));
-
-	//m_SeaImg.setOrigin(0, m_SeaTex.getSize().y);
-
 }
 
 bool Sea::checkCollision(GameObject& object)
