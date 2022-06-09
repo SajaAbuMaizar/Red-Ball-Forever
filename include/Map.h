@@ -43,7 +43,6 @@ private:
 	std::vector<std::shared_ptr<Obstacle>> m_obstacle;
 	std::vector<std::shared_ptr<Star>> m_star;
 	std::vector<std::shared_ptr<Box>> m_box;
-	std::vector<int> m_map;
 	std::vector<std::shared_ptr<Tree>> m_tree;
 
 	sf::SoundBuffer m_starCollectSoundBuf;

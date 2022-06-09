@@ -6,10 +6,10 @@ Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 	try
 	{
 		m_groundTex[LEFT_GROUND].loadFromFile("left.png");
-		m_groundTex[1].loadFromFile("middle.png");
-		m_groundTex[2].loadFromFile("right.png");
-		m_groundTex[3].loadFromFile("left edge.png");
-		m_groundTex[4].loadFromFile("right edge.png");
+		m_groundTex[MIDDLE_GROUND].loadFromFile("middle.png");
+		m_groundTex[RIGHT_GROUND].loadFromFile("right.png");
+		m_groundTex[LEFT_TALL_GROUND].loadFromFile("left edge.png");
+		m_groundTex[RIGHT_TALL_GROUND].loadFromFile("right edge.png");
 		m_seaTex.loadFromFile("Sea.png");
 		m_boxTex.loadFromFile("box.jpg");
 		m_treeTex.loadFromFile("tree.png");
@@ -43,7 +43,6 @@ Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 		board_file >> shape;
 		switch (shape)
 		{
-			m_map.push_back(shape);
 		case LEFT_GROUND: //left
 			m_ground.push_back(std::make_shared<Ground>(m_groundTex[LEFT_GROUND], world, pos,1, LEFT_GROUND, prev));
 			break;
