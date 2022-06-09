@@ -7,6 +7,7 @@ public:
 	Obstacle(std::shared_ptr<b2World>& world, sf::Texture& texture, const sf::Vector2f position);
 	void draw(sf::RenderWindow& window) { window.draw(m_ObstacleImg); };
 	sf::Sprite getSprite() const { return m_ObstacleImg; };
+	virtual ~Obstacle() = default;
 
 private:
 	sf::Sprite m_ObstacleImg;

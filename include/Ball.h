@@ -20,13 +20,14 @@ class Ball : public MovingObject
 public:
 	Ball(b2World& world);
 	void move(const DIRECTIONS dir);
-	void update(b2Vec2 pos1,const float angle);
+	void update(b2Vec2 pos1);
 	bool collidesWith(GameObject& object);
 	sf::Sprite getSprite() const { return m_ballImg; };
 	sf::Vector2f getPosition() const { return m_ballImg.getPosition(); };
 	void draw(sf::RenderWindow& window) { window.draw(m_ballImg); };
 	void restartBall();
 	void changeTransform(sf::Vector2f distance);
+	virtual ~Ball() = default;
 
 private:
 	b2Body* m_Body;

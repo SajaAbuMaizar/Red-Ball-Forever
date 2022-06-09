@@ -10,6 +10,7 @@ public:
 	sf::Sprite getSprite() const { return m_MonsterImg; };
 	void update(b2Vec2 pos);
 	bool checkCollisionwithBall(GameObject& object);
+	virtual ~Monster() = default;
 
 private:
 	sf::Sprite m_MonsterImg;

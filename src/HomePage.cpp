@@ -14,7 +14,7 @@ bool HomePage::display()
     int homeCounter = 0;
     sf::Sprite backGroundImg(m_background);
     sf::Sprite playButtonImg(m_playButton);
-    playButtonImg.setOrigin(m_playButton.getSize().x/2,m_playButton.getSize().y/2);
+    playButtonImg.setOrigin(float(m_playButton.getSize().x/2),float(m_playButton.getSize().y/2));
     playButtonImg.setPosition(sf::Vector2f(WIDTH/2,HEIGHT/1.5));
 
     while (m_homePage.isOpen())
@@ -40,14 +40,14 @@ bool HomePage::display()
                 {
                     homeCounter++;
                     backGroundImg.setTexture(m_controls);
-                    playButtonImg.setPosition(sf::Vector2f(WIDTH - m_playButton.getSize().x / 2, HEIGHT - m_playButton.getSize().y / 2));
+                    playButtonImg.setPosition(sf::Vector2f(float(WIDTH - m_playButton.getSize().x / 2), float(HEIGHT - m_playButton.getSize().y / 2)));
                     if (homeCounter == 2)
                     {
                         m_homePage.close();
                         return true;
                     }
-                    break;
                 }
+                break;
             }
             case sf::Event::MouseMoved:
             {

@@ -8,7 +8,7 @@ Sky::Sky(sf::Texture& skyTex, const int size)
 	for (auto& it: m_skyImg)
 	{
 		it.setTexture(skyTex);
-		it.setPosition(i * skyTex.getSize().x,-100.f);
+		it.setPosition(float(i * skyTex.getSize().x),-100.f);
 		i++;
 	}
 }

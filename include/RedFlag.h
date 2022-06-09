@@ -8,6 +8,7 @@ public:
 	void draw(sf::RenderWindow& window) { window.draw(m_redFlagImg); };
 	sf::Sprite getSprite() const { return m_redFlagImg; };
 	bool checkCollisionwithBall(GameObject& object);
+	virtual ~RedFlag() = default;
 
 private:
 	sf::Texture m_redFlag;

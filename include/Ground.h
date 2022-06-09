@@ -17,6 +17,7 @@ public:
 	int getSide() const { return m_side; };
 	int getPrev() const { return m_prev; };
 	sf::Vector2f getPosition() const { return m_groundImg.getPosition(); };
+	virtual ~Ground() = default;
 	
 
 private:

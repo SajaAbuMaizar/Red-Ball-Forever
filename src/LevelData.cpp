@@ -38,8 +38,8 @@ void LevelData::showResult(const std::pair<sf::Texture,sf::Texture>& result)
 {
 	sf::Sprite resultImg(result.first);
     sf::Sprite playButtonImg(result.second);
-    playButtonImg.setOrigin(result.second.getSize().x/2, result.second.getSize().y/2);
-    playButtonImg.setPosition(result.first.getSize().x/2, result.first.getSize().y/1.3);
+    playButtonImg.setOrigin(float(result.second.getSize().x/2), float(result.second.getSize().y/2));
+    playButtonImg.setPosition(float(result.first.getSize().x/2), float(result.first.getSize().y/1.3));
 	sf::RenderWindow resultWindow(sf::VideoMode(result.first.getSize().x, result.first.getSize().y), "!! Result Window !!");
 
     while (resultWindow.isOpen())

@@ -26,7 +26,7 @@ public:
 	Map(const std::string fileName, std::shared_ptr<b2World>& world);
 	void draw(sf::RenderWindow& window);
 	void update();
-	int getGroundAmount() const { return m_ground.size(); };
+	int getGroundAmount() const { return int(m_ground.size()); };
 	bool checkCollisionWithStars(Ball& ball);
 	bool checkCollisionWithSea(Ball& ball);
 	std::pair<bool, sf::Vector2f> checkCollisionWithObstacle(Ball& ball);

@@ -4,7 +4,7 @@ Star::Star(std::shared_ptr<b2World>& world, sf::Texture& starTex, const int posi
 	   : m_pos(position),
 	     m_starImg(starTex)
 {
-	m_starImg.setOrigin(starTex.getSize().x / 2, 0);
+	m_starImg.setOrigin(float(starTex.getSize().x / 2), 0.f);
 
 	b2BodyDef BodyDef;
 	BodyDef.position = b2Vec2(500 * m_pos, (POS_SCALER*2));
@@ -22,7 +22,7 @@ Star::Star(std::shared_ptr<b2World>& world, sf::Texture& starTex, const int posi
 	FixtureDef.shape = &Shape;
 	m_Body->CreateFixture(&FixtureDef);
 
-	m_starImg.setPosition(500 * m_pos, 200); //for tall and short grounds
+	m_starImg.setPosition(float(500 * m_pos), 200.f); //for tall and short grounds
 }
 
 //implement Star class destructor
