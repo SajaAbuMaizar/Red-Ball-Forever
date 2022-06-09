@@ -3,21 +3,27 @@
 Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 {
 	m_groundTex.resize(GROUND_TEXTURES);
-	m_groundTex[LEFT_GROUND].loadFromFile("left.png");
-	m_groundTex[1].loadFromFile("middle.png");
-	m_groundTex[2].loadFromFile("right.png");
-	m_groundTex[3].loadFromFile("left edge.png");
-	m_groundTex[4].loadFromFile("right edge.png");
-	m_seaTex.loadFromFile("Sea.png");
-	m_boxTex.loadFromFile("box.jpg");
-	m_treeTex.loadFromFile("tree.png");
-	m_ObstacleTex.loadFromFile("obsticle.png");
-	m_starTex.loadFromFile("Star.png");
-	m_starCollectSoundBuf.loadFromFile("star collect sound.wav");
+	try
+	{
+		m_groundTex[LEFT_GROUND].loadFromFile("left.png");
+		m_groundTex[1].loadFromFile("middle.png");
+		m_groundTex[2].loadFromFile("right.png");
+		m_groundTex[3].loadFromFile("left edge.png");
+		m_groundTex[4].loadFromFile("right edge.png");
+		m_seaTex.loadFromFile("Sea.png");
+		m_boxTex.loadFromFile("box.jpg");
+		m_treeTex.loadFromFile("tree.png");
+		m_ObstacleTex.loadFromFile("obsticle.png");
+		m_starTex.loadFromFile("Star.png");
+		m_starCollectSoundBuf.loadFromFile("star collect sound.wav");
+	}
+	catch(...)
+	{
+		std::cerr << "Can't load program files\n";
+	}
 	m_starSound = sf::Sound(m_starCollectSoundBuf);
 
 	std::ifstream board_file;
-
 	try
 	{
 		board_file.open(fileName);
