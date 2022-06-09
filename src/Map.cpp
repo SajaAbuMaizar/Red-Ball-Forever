@@ -3,7 +3,7 @@
 Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 {
 	m_groundTex.resize(GROUND_TEXTURES);
-	m_groundTex[0].loadFromFile("left.png");
+	m_groundTex[LEFT_GROUND].loadFromFile("left.png");
 	m_groundTex[1].loadFromFile("middle.png");
 	m_groundTex[2].loadFromFile("right.png");
 	m_groundTex[3].loadFromFile("left edge.png");
@@ -17,11 +17,18 @@ Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 	m_starSound = sf::Sound(m_starCollectSoundBuf);
 
 	std::ifstream board_file;
-	board_file.open(fileName);
-	if (!board_file) //if opening the file faild. . .
+
+	try
 	{
-		std::cerr << "Error: File could NOT be opened !!!"; exit(1);
+		board_file.open(fileName);
+		if (!board_file) //if opening the file faild. . .
+			throw std::istream::failure("Error: File could NOT be opened !!!");
 	}
+	catch (std::istream::failure e)
+	{
+		std::cerr << e.what(); exit(1);
+	}
+
 	int pos = 0;
 	int prev = -1;
 	while (!board_file.eof())
