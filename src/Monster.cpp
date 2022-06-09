@@ -7,7 +7,7 @@ Monster::Monster(std::shared_ptr<b2World>& world, sf::Vector2f pos): m_pos(pos)
 	m_MonsterImg.setOrigin(float(m_MonsterTex.getSize().x / 2), float(m_MonsterTex.getSize().y / 2));
 
 	b2BodyDef BodyDef;
-	BodyDef.position = b2Vec2(100, m_pos.y - 70);
+	BodyDef.position = b2Vec2((POS_SCALER/2), m_pos.y - 70);
 
 	BodyDef.type = b2_kinematicBody;
 	m_Body = world->CreateBody(&BodyDef);
@@ -26,7 +26,7 @@ Monster::Monster(std::shared_ptr<b2World>& world, sf::Vector2f pos): m_pos(pos)
 
 void Monster::update(b2Vec2 pos)
 {
-	m_MonsterImg.setPosition(pos.x, 600 - pos.y);
+	m_MonsterImg.setPosition(pos.x, SCALER - pos.y);
 }
 
 bool Monster::checkCollisionwithBall(GameObject& object)

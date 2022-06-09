@@ -6,7 +6,6 @@
 #include "StaticObject.h"
 
 const int FITTER = 65;
-const int POSITION_SCALER = 200;
 
 class Ground : public StaticObject
 {

@@ -3,6 +3,9 @@
 #include "box2d/box2d.h"
 #include <iostream>
 
+const int SCALER = 600;
+const int POS_SCALER = 200;
+
 class GameObject
 {
 public:
