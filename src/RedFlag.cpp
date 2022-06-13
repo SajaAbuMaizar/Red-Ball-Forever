@@ -1,5 +1,6 @@
 #include "RedFlag.h"
 
+//The c-tor of the red flag class
 RedFlag::RedFlag(b2World& world, const int size)
 {
 	try
@@ -12,7 +13,7 @@ RedFlag::RedFlag(b2World& world, const int size)
 	}
 	m_redFlagImg.setTexture(m_redFlag);
 	m_redFlagImg.setPosition(float((size - 2) * POS_SCALER), float((POS_SCALER*2) - m_redFlag.getSize().y));
-
+    //creating the body of the red flag
 	b2BodyDef BodyDef;
 	BodyDef.position = b2Vec2(float((size - 2) * POS_SCALER), 220.f);
 	BodyDef.type = b2_staticBody;
@@ -27,6 +28,8 @@ RedFlag::RedFlag(b2World& world, const int size)
 
 }
 
+//This function checks if the red flag collided with the rederred object
+//return true if collided, false otherwise
 bool RedFlag::checkCollisionwithBall(GameObject& object)
 {
 	return m_redFlagImg.getGlobalBounds().intersects(object.getSprite().getGlobalBounds());

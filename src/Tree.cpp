@@ -1,5 +1,6 @@
 #include "Tree.h"
 
+//The c-tor of the tree class
 Tree::Tree(std::shared_ptr<b2World>& world,const sf::Texture& treeTex, const sf::Vector2f position)
 	: m_pos(position),
 	  m_treeImg(treeTex)
@@ -9,7 +10,7 @@ Tree::Tree(std::shared_ptr<b2World>& world,const sf::Texture& treeTex, const sf:
 
 	b2BodyDef BodyDef;
 	BodyDef.position = b2Vec2(m_pos.x, SCALER - m_pos.y + treeTex.getSize().y / 2);
-
+    //creating the body of the tree
 	BodyDef.type = b2_staticBody;
 	m_Body = world->CreateBody(&BodyDef);
 	m_Body->SetLinearVelocity(b2Vec2(1, 0)); //move right 1 unit per second

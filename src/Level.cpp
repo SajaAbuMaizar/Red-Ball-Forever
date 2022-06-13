@@ -1,5 +1,6 @@
 #include "Level.h"
 
+//This function starts the level
 void Level::startLevel()
 {
     try
@@ -13,13 +14,12 @@ void Level::startLevel()
     
     m_backgroundMusic.play();
     m_backgroundMusic.setLoop(true);
-    if (m_homePage.display())
-    {
+    
+    if (m_homePage.display()) //if the game has done displaying the home page
         for (int level = 1 ; level <= LEVELS; level++)
         {
             Controller newLevel(level);
             if (!newLevel.run()) //if lost a game
                 level--;
         }
-    }
 }

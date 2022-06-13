@@ -1,5 +1,6 @@
 #include "Controller.h"
 
+//The c-tor of the controller class
 Controller::Controller(const int level) : m_window(sf::VideoMode(WIDTH, HEIGHT), "Red Ball Forever"),
                            m_world(std::make_unique<b2World>(b2Vec2(0.0f, -9.8f))),
                            m_ball(*m_world),
@@ -23,11 +24,12 @@ Controller::Controller(const int level) : m_window(sf::VideoMode(WIDTH, HEIGHT),
     m_window.close();
 }
 
+//This function runs the current level
 bool Controller::run()
 {
     m_window.create(sf::VideoMode(WIDTH, HEIGHT), "Red Ball Forever");
     m_window.setFramerateLimit(360);
-    ///
+    //creating the level's objects and obstacles
     Map currentMap(createFileName(), m_world);
     Sky sky(m_skyTex ,currentMap.getGroundAmount());
     RedFlag redFlag(*m_world, currentMap.getGroundAmount());
@@ -36,46 +38,39 @@ bool Controller::run()
     {
         m_world->Step(1 / 60.f, 8, 3);
         updateView();
-        m_levelData.update(m_ball.getPosition(), m_level, m_score);
+        m_levelData.update(m_ball.getPosition(), m_level, m_score);//update the level's data
 
         m_window.clear(sf::Color::White);
         sky.draw(m_window);
         m_levelData.draw(m_window, m_availableLives);
         for (b2Body* BodyIterator = m_world->GetBodyList(); BodyIterator != 0; BodyIterator = BodyIterator->GetNext())
         {
-            if (BodyIterator->GetType() == b2_dynamicBody)
-            {
+            if (BodyIterator->GetType() == b2_dynamicBody) { //if the object is a ball then update and draw it
                 m_ball.update(BodyIterator->GetPosition());
                 m_ball.draw(m_window);
             }
-            else if (BodyIterator->GetType() == b2_kinematicBody)
-            {
+            else if (BodyIterator->GetType() == b2_kinematicBody) {//if the object is a monster then update and draw it
                 monster.update(BodyIterator->GetPosition());
                 monster.draw(m_window);
             }
         }
-        m_score = (currentMap.checkCollisionWithStars(m_ball)) ? m_score + 100 : m_score;
-        if (redFlag.checkCollisionwithBall(m_ball))
-        {
+        m_score = (currentMap.checkCollisionWithStars(m_ball)) ? m_score + 100 : m_score;//when collecting a star increase the score
+        if (redFlag.checkCollisionwithBall(m_ball)) { //if the ball reaches the red flag(the end) then win the level
             m_success = true;
             m_window.close();
             m_levelData.showResult(m_winResult);
             return true;
         }
-        if (currentMap.checkCollisionWithSea(m_ball) ||
-             monster.checkCollisionwithBall(m_ball))
-        {
-            m_ball.restartBall();
+        if (currentMap.checkCollisionWithSea(m_ball) || monster.checkCollisionwithBall(m_ball)) { //if the ball collides with an sea or monster
+            m_ball.restartBall(); //restart the ball from the original position
             m_availableLives--;
         }
         std::pair<bool, sf::Vector2f> obstacleResult = currentMap.checkCollisionWithObstacle(m_ball);
-        if (obstacleResult.first)
-        {
-            m_ball.changeTransform(obstacleResult.second);
+        if (obstacleResult.first) { //if the ball collided with an obstacle
+            m_ball.changeTransform(obstacleResult.second);//move the ball behind the obstacle
             m_availableLives--;
         }
-        if (m_availableLives == 0)
-        {
+        if (m_availableLives == 0) { //if all game lives are lost then restart the level
             m_levelData.showResult(m_lostResult);
             return false;
         }
@@ -86,37 +81,31 @@ bool Controller::run()
 
         for (auto event = sf::Event{}; m_window.pollEvent(event); )
         {
-            switch (event.type)
-            {
+            switch (event.type) {
             case sf::Event::Closed:
                 m_window.close();
                 break;
             case sf::Event::KeyPressed:
-                if (updateDirection(event.key.code))
-                {
+                if (updateDirection(event.key.code)) //when pressing a directional key then move the ball
                     m_ball.move(m_dir);
-                }
                 break;
-            }
-        }
+            } }
     }
     return true;
 }
 
+//This function updates the window viuew of the game accoring to the ball position
 void Controller::updateView()
 {
-    if (m_ball.getPosition().x >= WIDTH / 2 && m_ball.getPosition().y >= HEIGHT / 2) //move with the ball
-    {
+    if (m_ball.getPosition().x >= WIDTH / 2 && m_ball.getPosition().y >= HEIGHT / 2) { //move with the ball
         auto view = sf::View(sf::Vector2f(m_ball.getPosition().x, m_ball.getPosition().y - 50), sf::Vector2f(WIDTH, HEIGHT));
         m_window.setView(view);
     }
-    else if (m_ball.getPosition().x < WIDTH / 2)
-    {
+    else if (m_ball.getPosition().x < WIDTH / 2) {
         auto view = sf::View(sf::Vector2f(WIDTH / 2, m_ball.getPosition().y - 50), sf::Vector2f(WIDTH, HEIGHT));
         m_window.setView(view);
     }
-    else if (m_ball.getPosition().y < HEIGHT / 2)
-    {
+    else if (m_ball.getPosition().y < HEIGHT / 2) {
         auto view = sf::View(sf::Vector2f(m_ball.getPosition().x, HEIGHT / 2 - 50), sf::Vector2f(WIDTH, HEIGHT));
         m_window.setView(view);
     }
@@ -128,6 +117,7 @@ std::string Controller::createFileName()
     return (std::to_string(m_level) + ".txt");
 }
 
+//This function updates the current direction of the ball based on the key pressed by the user
 std::optional<DIRECTIONS> Controller::updateDirection(const sf::Keyboard::Key key)
 {
     switch(key)

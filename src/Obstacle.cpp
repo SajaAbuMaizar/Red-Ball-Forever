@@ -1,5 +1,6 @@
 #include "Obstacle.h"
 
+//The c-tor of the obstacle class
 Obstacle::Obstacle(std::shared_ptr<b2World>& world, sf::Texture& texture, const sf::Vector2f position)
 	    : m_pos(position),
 	     m_ObstacleImg(texture)
@@ -8,7 +9,7 @@ Obstacle::Obstacle(std::shared_ptr<b2World>& world, sf::Texture& texture, const 
 	BodyDef.position = b2Vec2(50 + m_pos.x , SCALER - m_pos.y + 50);
 	BodyDef.type = b2_staticBody;
 	m_Body = world->CreateBody(&BodyDef);
-
+    //creating the body of the obstacles
 	b2PolygonShape Shape;
 	Shape.SetAsBox(70.5f, 50.5f);
 

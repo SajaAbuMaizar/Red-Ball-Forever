@@ -1,5 +1,6 @@
 #include "Sea.h"
 
+//The c-tor of the sea class
 Sea::Sea(sf::Texture& texture, std::shared_ptr<b2World>& world, int pos) :
 	m_seaImg(texture),
 	m_pos(pos)
@@ -17,11 +18,10 @@ Sea::Sea(sf::Texture& texture, std::shared_ptr<b2World>& world, int pos) :
 	Body->CreateFixture(&FixtureDef);
 
 	m_seaImg.setPosition(float(m_pos * POS_SCALER), float(POS_SCALER*2));
-
-	//m_SeaImg.setOrigin(0, m_SeaTex.getSize().y);
-
 }
 
+//This function checks if the sea collided with the rederred object
+//return true if collided, false otherwise
 bool Sea::checkCollision(GameObject& object)
 {
 	return m_seaImg.getGlobalBounds().intersects(object.getSprite().getGlobalBounds());

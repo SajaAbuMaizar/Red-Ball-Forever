@@ -1,5 +1,6 @@
 #include "Monster.h"
 
+//The c-tor of the monster class
 Monster::Monster(std::shared_ptr<b2World>& world, sf::Vector2f pos): m_pos(pos)
 {
 	try
@@ -12,7 +13,7 @@ Monster::Monster(std::shared_ptr<b2World>& world, sf::Vector2f pos): m_pos(pos)
 	}
 	m_MonsterImg.setTexture(m_MonsterTex);
 	m_MonsterImg.setOrigin(float(m_MonsterTex.getSize().x / 2), float(m_MonsterTex.getSize().y / 2));
-
+    //creating the body of the monster
 	b2BodyDef BodyDef;
 	BodyDef.position = b2Vec2((POS_SCALER/2), m_pos.y - 70);
 
@@ -31,11 +32,14 @@ Monster::Monster(std::shared_ptr<b2World>& world, sf::Vector2f pos): m_pos(pos)
 	m_Body->CreateFixture(&FixtureDef);
 }
 
+//This function updates the monster position based on its position in the world
 void Monster::update(b2Vec2 pos)
 {
 	m_MonsterImg.setPosition(pos.x, SCALER - pos.y);
 }
 
+//This function checks if the monster collided with the rederred object
+//return true if collided, false otherwise
 bool Monster::checkCollisionwithBall(GameObject& object)
 {
 	return m_MonsterImg.getGlobalBounds().intersects(object.getSprite().getGlobalBounds());

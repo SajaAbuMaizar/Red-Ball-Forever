@@ -1,5 +1,6 @@
 #include "LevelData.h"
 
+//The c-tor of level data class
 LevelData::LevelData()
 {
     m_hearts.resize(LIVES);
@@ -17,6 +18,7 @@ LevelData::LevelData()
 	m_font.loadFromFile("C:/Windows/Fonts/COOPBL.ttf");
 }
 
+//This function draws the level's data to the window
 void LevelData::draw(sf::RenderWindow& window,const int img)
 {
 	m_heartImg.setTexture(m_hearts[img - 1]);
@@ -25,6 +27,7 @@ void LevelData::draw(sf::RenderWindow& window,const int img)
 	window.draw(m_scoreText);
 }
 
+//This function updates the level's data
 void LevelData::update(const sf::Vector2f pos, const int currlevel, const int currScore)
 {
 	m_heartImg.setPosition(10 + abs(pos.x - POSITION_FITTER), 10);
@@ -39,6 +42,7 @@ void LevelData::update(const sf::Vector2f pos, const int currlevel, const int cu
 	m_scoreText.setFillColor(sf::Color::Black);
 }
 
+//This function shows the result of the current level (win or lose)
 void LevelData::showResult(const std::pair<sf::Texture,sf::Texture>& result)
 {
 	sf::Sprite resultImg(result.first);

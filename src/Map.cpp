@@ -1,5 +1,6 @@
 #include "Map.h"
 
+//The c-tor of the Map class
 Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 {
 	m_groundTex.resize(GROUND_TEXTURES);
@@ -37,7 +38,7 @@ Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 
 	int pos = 0;
 	int prev = -1;
-	while (!board_file.eof())
+	while (!board_file.eof()) //reading the file letter by letter
 	{
 		int shape;
 		board_file >> shape;
@@ -68,7 +69,7 @@ Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 
 	int counter = 0;
 	m_star.resize(pos/3);
-	for (auto& it: m_star)
+	for (auto& it: m_star) //creating the stars
 	{
 		it = std::make_shared<Star>(world,m_starTex, counter);
 		counter++;
@@ -76,14 +77,14 @@ Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 	
 	counter = 0;
 	sf::Vector2f tempPos;
-	for (const auto& it : m_ground)
+	for (const auto& it : m_ground) //creating the obstacles
 	{
 		if (it->getSide() == MIDDLE_GROUND)
 		{
 			counter++;
 			tempPos = it->getPosition();
 		}
-		if (counter == 7) //every 7 middle ground, insert an obstacle
+		if (counter == 7) //every 7 middle grounds, insert an obstacle
 		{
 			m_obstacle.push_back(std::make_shared<Obstacle>(world,m_ObstacleTex, tempPos));
 			counter = 0;
@@ -99,25 +100,27 @@ Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 	m_tree.push_back(std::make_shared<Tree>(world, m_treeTex, m_ground[m_ground.size() - 2]->getPosition()));//last tree(at the ending of game)
 }
 
+//This function checks if the ball collided with the stars
+//returns true if collided, false otherwise
 bool Map::checkCollisionWithStars(Ball& ball)
 {
 	for (int i = 0 ; i < m_star.size(); i++)
-		if (ball.collidesWith(*m_star[i]))
-		{
+		if (ball.collidesWith(*m_star[i])) {
 			m_starSound.play();
-			m_star.erase(m_star.begin() + i);
+			m_star.erase(m_star.begin() + i); //erase the collected star
 			return true;
 		}
 	return false;
 }
 
+//This function checks if the ball collided with the obstacles
+//returns true if collided, false otherwise
 std::pair<bool, sf::Vector2f> Map::checkCollisionWithObstacle(Ball& ball)
 {
 	std::pair<bool, sf::Vector2f> result;
 	result.first = false;
 	for (int i = 0; i < m_obstacle.size(); i++)
-		if (ball.collidesWith(*m_obstacle[i]))
-		{
+		if (ball.collidesWith(*m_obstacle[i])) {
 			result.first = true;
 			result.second = m_obstacle[i]->getSprite().getPosition();
 		}
@@ -125,6 +128,8 @@ std::pair<bool, sf::Vector2f> Map::checkCollisionWithObstacle(Ball& ball)
 	return result;
 }
 
+//This function checks if the ball collided with the sea
+//returns true if collided, false otherwise
 bool Map::checkCollisionWithSea(Ball& ball)
 {
 	for (int i = 0; i < m_sea.size(); i++)
@@ -133,6 +138,7 @@ bool Map::checkCollisionWithSea(Ball& ball)
 	return false;
 }
 
+//This function draws the game objects into the window
 void Map::draw(sf::RenderWindow& window)
 {
 	for (const auto& it : m_star)
