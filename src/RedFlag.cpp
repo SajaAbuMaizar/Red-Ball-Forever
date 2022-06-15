@@ -12,10 +12,10 @@ RedFlag::RedFlag(b2World& world, const int size)
 		std::cerr << "Can't Load program files\n";
 	}
 	m_redFlagImg.setTexture(m_redFlag);
-	m_redFlagImg.setPosition(float((size - 2) * POS_SCALER), float((POS_SCALER*2) - m_redFlag.getSize().y));
+	m_redFlagImg.setPosition(float((size - 3) * POS_SCALER), float((POS_SCALER*2) - m_redFlag.getSize().y));
     //creating the body of the red flag
 	b2BodyDef BodyDef;
-	BodyDef.position = b2Vec2(float((size - 2) * POS_SCALER), 220.f);
+	BodyDef.position = b2Vec2(float((size - 3) * POS_SCALER), 220.f);
 	BodyDef.type = b2_staticBody;
 	b2Body* Body = world.CreateBody(&BodyDef);
 

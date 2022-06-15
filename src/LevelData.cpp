@@ -76,6 +76,9 @@ void LevelData::showResult(const std::pair<sf::Texture,sf::Texture>& result)
                     break;
                 }
             }
+            case sf::Event::KeyPressed:
+                if (event.key.code == sf::Keyboard::Escape)
+                    exit(0);
             }
         }
     }

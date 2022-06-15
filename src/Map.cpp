@@ -97,7 +97,7 @@ Map::Map(const std::string fileName, std::shared_ptr<b2World>& world)
 			m_box.push_back(std::make_shared<Box>(world, m_boxTex, m_ground[i-1]->getPosition()));
 
 	m_tree.push_back(std::make_shared<Tree>(world, m_treeTex, sf::Vector2f(400,400)));//first tree(at the beginning of game)
-	m_tree.push_back(std::make_shared<Tree>(world, m_treeTex, m_ground[m_ground.size() - 2]->getPosition()));//last tree(at the ending of game)
+	m_tree.push_back(std::make_shared<Tree>(world, m_treeTex, m_ground[m_ground.size() - 1]->getPosition()));//last tree(at the ending of game)
 }
 
 //This function checks if the ball collided with the stars

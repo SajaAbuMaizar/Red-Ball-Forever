@@ -57,7 +57,6 @@ bool Controller::run()
         m_score = (currentMap.checkCollisionWithStars(m_ball)) ? m_score + 100 : m_score;//when collecting a star increase the score
         if (redFlag.checkCollisionwithBall(m_ball)) { //if the ball reaches the red flag(the end) then win the level
             m_success = true;
-            m_window.close();
             m_levelData.showResult(m_winResult);
             return true;
         }
@@ -84,8 +83,10 @@ bool Controller::run()
             switch (event.type) {
             case sf::Event::Closed:
                 m_window.close();
-                break;
+                exit(0);
             case sf::Event::KeyPressed:
+                if (event.key.code == sf::Keyboard::Escape)
+                    exit(0);
                 if (updateDirection(event.key.code)) //when pressing a directional key then move the ball
                     m_ball.move(m_dir);
                 break;

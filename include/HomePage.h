@@ -10,6 +10,7 @@ class HomePage
 public:
 	HomePage();
 	bool display();
+	~HomePage() = default;
 
 private:
 	sf::RenderWindow m_homePage;

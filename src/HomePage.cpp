@@ -65,8 +65,16 @@ bool HomePage::display()
                     playButtonImg.setTexture(m_playButton);
                 break;
             }
+            case sf::Event::KeyPressed:
+                if (event.key.code == sf::Keyboard::Escape)
+                    exit(0);
             }
         }
     }
     return false;
 }
+
+/*HomePage::~HomePage()
+{
+    m_homePage.close();
+}*/

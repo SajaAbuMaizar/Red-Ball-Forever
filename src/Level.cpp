@@ -16,10 +16,14 @@ void Level::startLevel()
     m_backgroundMusic.setLoop(true);
     
     if (m_homePage.display()) //if the game has done displaying the home page
-        for (int level = 1 ; level <= LEVELS; level++)
+    {
+        m_homePage.~HomePage();
+        for (int level = 1; level <= LEVELS; level++)
         {
             Controller newLevel(level);
             if (!newLevel.run()) //if lost a game
                 level--;
         }
+    }
+
 }

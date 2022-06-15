@@ -46,7 +46,7 @@ elseif (CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
     )
 endif ()
 
-add_executable (${CMAKE_PROJECT_NAME} )
+add_executable (${CMAKE_PROJECT_NAME} WIN32)
 
 target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE $<$<CONFIG:DEBUG>:-fsanitize=address>)
 target_link_options(${CMAKE_PROJECT_NAME} PRIVATE $<$<CONFIG:DEBUG>:-fsanitize=address>)

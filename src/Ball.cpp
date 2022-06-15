@@ -45,10 +45,14 @@ void Ball::move(const DIRECTIONS dir)
 		}
 		break;
 	case DIRECTIONS::RIGHT:
-		m_Body->ApplyForceToCenter(b2Vec2(170, 0), true);
+		m_Body->ApplyForceToCenter(b2Vec2(150, 0), true);
+		if (m_Body->GetLinearVelocity().x > 80)
+			m_Body->SetLinearVelocity(b2Vec2(80, 0));
 		break;
 	case DIRECTIONS::LEFT:
-		m_Body->ApplyForceToCenter(b2Vec2(-170, 0), true);
+		m_Body->ApplyForceToCenter(b2Vec2(-150, 0), true);
+		if (m_Body->GetLinearVelocity().x > 80)
+			m_Body->SetLinearVelocity(b2Vec2(80, 0));
 		break;
 	}
 }
